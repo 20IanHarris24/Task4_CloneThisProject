@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
         /// <summary>
-        /// The main method, vill handle the menues for the program
+        /// The main method, will handle the menus for the program
         /// </summary>
         /// <param name="args"></param>
         static void Main()
@@ -63,7 +64,7 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineList()
         {
             /*
-             * Loop this method untill the user inputs something to exit to main menue.
+             * Loop this method execute until the user inputs something to exit to main menu.
              * Create a switch statement with cases '+' and '-'
              * '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
              * '-': Remove the rest of the input from the list (The user could write -Adam and "Adam" would be removed from the list)
@@ -72,25 +73,111 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
 
-            //switch(nav){...}
+            var EnteringData = true;
+            int howMany = 0;
+                        
+
+            List<string> theList = new List<string>();
+
+            Console.WriteLine("List Capacity : {0}", theList.Capacity);
+
+            do
+            {
+                Console.WriteLine("\nPlease enter a word to add to a list. Place a '+' to add to the list and '-' to remove from the list");
+                string input = Console.ReadLine()!;
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav) 
+                {
+                    case '+': theList.Add(value); howMany++; break;
+
+                    case '-': theList.Remove(value); howMany--; break;
+
+                    default: Console.WriteLine("Ended up here because I haven't written code to validate the input"); break;
+                }
+
+                Console.WriteLine("\nNames in the List : " + howMany);
+                Console.WriteLine("List Capacity is now : {0}", theList.Capacity, "\n");
+
+                Console.WriteLine("Another Name 'y' or 'n'?");
+                char again = Console.ReadKey().KeyChar;
+
+                if (again == 'Y' || again == 'y')
+                {
+                    continue;
+                }
+                else { 
+                
+                EnteringData = false;
+                
+                }
+
+
+            }
+            while (EnteringData);
+         
         }
 
         /// <summary>
-        /// Examines the datastructure Queue
+        /// Examines the data-structure Queue
         /// </summary>
         static void ExamineQueue()
         {
             /*
-             * Loop this method untill the user inputs something to exit to main menue.
+             * Loop this method until the user inputs something to exit to main menu.
              * Create a switch with cases to enqueue items or dequeue items
-             * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
+             * Make sure to look at the queue after Enqueuing and Dequeuing to see how it behaves
             */
+
+            var EnteringData = true;
+            Queue<string> ICAQueue = new Queue<string>();
+            Console.WriteLine("\nTo start add someone to the queue type '+' in front of their name. To expedite type '-' in front of the name");
+            Console.WriteLine("\nStart (Y/N)");
+            char start = Console.ReadKey().KeyChar;
+
+            if (start == 'Y' || start == 'y')
+
+            {
+                Console.WriteLine("\nThe checkout at ICA is now open and currently has : {0} people", ICAQueue.Count);
+
+                do
+                {
+                    Console.WriteLine("\nThe checkout now has : {0} people", ICAQueue.Count);
+                    Console.Write("\nEnter Name: ");
+
+                    string input = Console.ReadLine()!;
+                    char nav = input[0];
+                    string value = input.Substring(1);
+
+                    switch (nav)
+                    {
+                        case '+': ICAQueue.Enqueue(value); Console.WriteLine($"\n{value} joined the queue"); break;
+
+                        case '-': ICAQueue.Peek(); ICAQueue.Dequeue(); Console.WriteLine($"\n{value} has been expedited and left the queue"); break;
+
+                        default: Console.WriteLine("Ended up here because I haven't written code to validate the input"); break;
+                    }
+
+                }
+                while (EnteringData);
+            }
+            else
+            {
+
+                EnteringData = false;
+                Console.WriteLine("\nThe checkout at ICA is closed");
+                
+            }
         }
+
+
+
+
+
+
+ 
 
         /// <summary>
         /// Examines the datastructure Stack
@@ -98,10 +185,58 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineStack()
         {
             /*
-             * Loop this method until the user inputs something to exit to main menue.
+             * Loop this method until the user inputs something to exit to main menu.
              * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
+             * Make sure to look at the stack after pushing and and popping to see how it behaves
             */
+
+            var EnteringData = true;
+            Queue<string> ICAQueue = new Queue<string>();
+            Console.WriteLine("\nTo start add someone to the queue type '+' in front of their name. To expedite type '-' in front of the name");
+            Console.WriteLine("\nStart (Y/N)");
+            char start = Console.ReadKey().KeyChar;
+
+            if (start == 'Y' || start == 'y')
+
+            {
+                Console.WriteLine("\nThe checkout at ICA is now open and currently has : {0} people", ICAQueue.Count);
+
+                do
+                {
+                    Console.WriteLine("\nThe checkout now has : {0} people", ICAQueue.Count);
+                    Console.Write("\nEnter Name: ");
+
+                    string input = Console.ReadLine()!;
+                    char nav = input[0];
+                    string value = input.Substring(1);
+
+                    switch (nav)
+                    {
+                        case '+': ICAQueue.Enqueue(value); Console.WriteLine($"\n{value} joined the queue"); break;
+
+                        case '-': ICAQueue.Peek(); ICAQueue.Dequeue(); Console.WriteLine($"\n{value} has been expedited and left the queue"); break;
+
+                        default: Console.WriteLine("Ended up here because I haven't written code to validate the input"); break;
+                    }
+
+                }
+                while (EnteringData);
+            }
+            else
+            {
+
+                EnteringData = false;
+                Console.WriteLine("\nThe checkout at ICA is closed");
+
+            }
+
+
+
+
+
+
+
+
         }
 
         static void CheckParanthesis()

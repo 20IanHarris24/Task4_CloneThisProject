@@ -98,7 +98,11 @@ i.e. not knowing how many elements will populate the list so pre-allocates space
 6. If the maximum amount of elements to be processed is already known, then having a defined array at runtime is probably more advantageous.
 
 
+Övning 3: ExamineStack()
 
+1. See code. Because the stack uses a first in last out(FILO) algorithm with a Push/Pop mechanism to retrieve an element that is at the bottom of the stack
+uses means more data-shuffling, than with the Queue method, has it would have to remove all elements in the way of the wanted one.
+2. See code.
 
 
 

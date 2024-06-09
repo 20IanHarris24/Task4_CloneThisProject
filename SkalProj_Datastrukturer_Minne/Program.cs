@@ -140,7 +140,7 @@ namespace SkalProj_Datastrukturer_Minne
             if (start == 'Y' || start == 'y')
 
             {
-                Console.WriteLine("\nThe checkout at ICA is now open and currently has : {0} people", ICAQueue.Count);
+                Console.WriteLine("\nThe checkout at ICA is now open");
 
                 do
                 {
@@ -155,7 +155,7 @@ namespace SkalProj_Datastrukturer_Minne
                     {
                         case '+': ICAQueue.Enqueue(value); Console.WriteLine($"\n{value} joined the queue"); break;
 
-                        case '-': ICAQueue.Peek(); ICAQueue.Dequeue(); Console.WriteLine($"\n{value} has been expedited and left the queue"); break;
+                        case '-': ICAQueue.Dequeue(); Console.WriteLine($"\n{value} has been expedited and left the queue"); break;
 
                         default: Console.WriteLine("Ended up here because I haven't written code to validate the input"); break;
                     }
@@ -180,7 +180,7 @@ namespace SkalProj_Datastrukturer_Minne
  
 
         /// <summary>
-        /// Examines the datastructure Stack
+        /// Examines the data structure Stack
         /// </summary>
         static void ExamineStack()
         {
@@ -191,7 +191,7 @@ namespace SkalProj_Datastrukturer_Minne
             */
 
             var EnteringData = true;
-            Queue<string> ICAQueue = new Queue<string>();
+            Stack<string> ICAStack = new Stack<string>();
             Console.WriteLine("\nTo start add someone to the queue type '+' in front of their name. To expedite type '-' in front of the name");
             Console.WriteLine("\nStart (Y/N)");
             char start = Console.ReadKey().KeyChar;
@@ -199,22 +199,23 @@ namespace SkalProj_Datastrukturer_Minne
             if (start == 'Y' || start == 'y')
 
             {
-                Console.WriteLine("\nThe checkout at ICA is now open and currently has : {0} people", ICAQueue.Count);
+                Console.WriteLine("\nThe checkout at ICA is now open");
 
                 do
                 {
-                    Console.WriteLine("\nThe checkout now has : {0} people", ICAQueue.Count);
+                    Console.WriteLine("\nThe checkout now has : {0} people", ICAStack.Count);
                     Console.Write("\nEnter Name: ");
 
                     string input = Console.ReadLine()!;
                     char nav = input[0];
                     string value = input.Substring(1);
+                    ReverseText(value); //Call to reverse text method that uses the Stack.
 
                     switch (nav)
                     {
-                        case '+': ICAQueue.Enqueue(value); Console.WriteLine($"\n{value} joined the queue"); break;
+                        case '+': ICAStack.Push(value); Console.WriteLine("\n{0} joined the queue", value); break;
 
-                        case '-': ICAQueue.Peek(); ICAQueue.Dequeue(); Console.WriteLine($"\n{value} has been expedited and left the queue"); break;
+                        case '-': ICAStack.Pop(); Console.WriteLine("\n{0} has been expedited and left the queue", value); break;
 
                         default: Console.WriteLine("Ended up here because I haven't written code to validate the input"); break;
                     }
@@ -229,15 +230,59 @@ namespace SkalProj_Datastrukturer_Minne
                 Console.WriteLine("\nThe checkout at ICA is closed");
 
             }
+        }
 
 
 
+        static void ReverseText(string text)
+        {
+            char[]charText = text.ToCharArray();    
+            Stack<char> CharStack = new Stack<char>();
+            for (int i = 0; i < charText.Length; i++) 
+            { 
+            CharStack.Push(charText[i]);
+            }
+
+            for (int r = 0; r < charText.Length; r++)
+            {
+                charText[r] = CharStack.Pop();
+            }
 
 
-
-
+            Console.Write("Entered name reversed: ");
+            for (int p = 0; p < charText.Length; p++)
+            {
+                Console.Write(charText[p]);
+            }
+            
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         static void CheckParanthesis()
         {

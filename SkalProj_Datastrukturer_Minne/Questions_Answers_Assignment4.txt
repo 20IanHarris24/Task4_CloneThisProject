@@ -59,9 +59,6 @@ public int ReturnValue2()
     return x.Myvalue;
 }
 
-
-
-
 In the first method
 int object of x is created (value type)
 int object of y is created (value type)
@@ -91,7 +88,7 @@ i.e. not knowing how many elements will populate the list so pre-allocates space
 
 1. See code
 2. At program execution the list capacity is set to 0 element array but after entering the 1st name the list capacity increases
-3. The capacity increase to a 4 element array or by 400%
+3. The capacity increases to a 4 element array or by 400%
 4. The List class works on the premise of flexibility
 i.e. not knowing how many elements will populate the list so pre-allocates space to give that flexibility.
 5. No. the underlying capacity will be kept even if elements are removed.
@@ -102,7 +99,12 @@ i.e. not knowing how many elements will populate the list so pre-allocates space
 
 1. See code. Because the stack uses a first in last out(FILO) algorithm with a Push/Pop mechanism to retrieve an element that is at the bottom of the stack
 uses means more data-shuffling, than with the Queue method, has it would have to remove all elements in the way of the wanted one.
-2. See code.
+2. See code. Implemented a ReverseText method.
+
+
+
+Övning 4: CheckParenthesis()
+I chose the Stack using the FILO data structure. 
 
 
 

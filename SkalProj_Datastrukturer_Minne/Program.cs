@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -42,7 +44,7 @@ namespace SkalProj_Datastrukturer_Minne
                         ExamineStack();
                         break;
                     case '4':
-                        CheckParanthesis();
+                        CheckParenthesis();
                         break;
                     /*
                      * Extend the menu to include the recursive 
@@ -138,7 +140,6 @@ namespace SkalProj_Datastrukturer_Minne
             char start = Console.ReadKey().KeyChar;
 
             if (start == 'Y' || start == 'y')
-
             {
                 Console.WriteLine("\nThe checkout at ICA is now open");
 
@@ -172,13 +173,6 @@ namespace SkalProj_Datastrukturer_Minne
             }
         }
 
-
-
-
-
-
- 
-
         /// <summary>
         /// Examines the data structure Stack
         /// </summary>
@@ -197,7 +191,6 @@ namespace SkalProj_Datastrukturer_Minne
             char start = Console.ReadKey().KeyChar;
 
             if (start == 'Y' || start == 'y')
-
             {
                 Console.WriteLine("\nThe checkout at ICA is now open");
 
@@ -211,7 +204,7 @@ namespace SkalProj_Datastrukturer_Minne
                     string value = input.Substring(1);
                     ReverseText(value); //Call to reverse text method that uses the Stack.
 
-                    switch (nav)
+                    switch (nav)  //User information based on chose.
                     {
                         case '+': ICAStack.Push(value); Console.WriteLine("\n{0} joined the queue", value); break;
 
@@ -225,75 +218,93 @@ namespace SkalProj_Datastrukturer_Minne
             }
             else
             {
-
                 EnteringData = false;
                 Console.WriteLine("\nThe checkout at ICA is closed");
-
             }
         }
-
+        
+        
+        
+        
+        /*
+         Övning 3 ReverseText Method
+         Using the Stack         
+         */
 
 
         static void ReverseText(string text)
         {
-            char[]charText = text.ToCharArray();    
-            Stack<char> CharStack = new Stack<char>();
-            for (int i = 0; i < charText.Length; i++) 
-            { 
-            CharStack.Push(charText[i]);
-            }
+                char[]charText = text.ToCharArray();    
+                Stack<char> CharStack = new Stack<char>();
 
-            for (int r = 0; r < charText.Length; r++)
-            {
-                charText[r] = CharStack.Pop();
-            }
-
-
-            Console.Write("Entered name reversed: ");
-            for (int p = 0; p < charText.Length; p++)
-            {
-                Console.Write(charText[p]);
-            }
-            
+                for (int i = 0; i < charText.Length; i++) 
+                { 
+                    CharStack.Push(charText[i]);
+                }
+                
+                Console.Write("Entered name reversed: ");
+                for (int r = 0; r < charText.Length; r++)
+                {
+                    charText[r] = CharStack.Pop();
+                    Console.Write(charText[r]);
+                }
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        static void CheckParanthesis()
+        static void CheckParenthesis()
         {
             /*
-             * Use this method to check if the paranthesis in a string is Correct or incorrect.
+             * Use this method to check if the parenthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
-        }
 
+            var EnteringData = true;
+            Stack <char> parenthesisStack = new Stack<char>(); //Initialising a Stack FILO
+            Console.WriteLine("\nParenthesis check"); //User instruction
+
+
+
+            do
+            {
+                Console.Write("\nEnter your parenthesis chain: ");
+                string userInput = Console.ReadLine()!;        //Accept User Input 
+                char[] arrSource = userInput.ToCharArray();    // Convert User Input to an array of characters 
+
+
+                for (int i = 0; i < arrSource.Length; i++)
+                {
+                    if (arrSource[i] == '(' || arrSource[i] == '{' || arrSource[i] == '[')    // Search Char array for open brackets and Push them to Stack
+                    {
+                        parenthesisStack.Push(arrSource[i]);
+                    }
+                    else if (parenthesisStack.Peek() == '(' && arrSource[i] == ')'           //Compare Stack last element with Char array for closed brackets  
+                                || parenthesisStack.Peek() == '{' && arrSource[i] == '}'
+                                       || parenthesisStack.Peek() == '[' && arrSource[i] == ']')
+                            { 
+                                parenthesisStack.Pop();   //Pop open bracket from the Stack if the corresponding closed bracket condition is met.
+                    }
+                         //Console.WriteLine("Stack count : " + parenthesisStack.Count);
+                }
+
+
+                            if (parenthesisStack.Count == 0)   //If the Stack count == 0 then brackets are matching
+                            {
+                                Console.WriteLine("\nThe string {0} entered has matching parenthesis", userInput);
+                                continue;
+                            }
+
+                            else                               //If the Stack count > 0 then brackets are non matching
+                            {
+                                Console.WriteLine("\nThe string {0} entered does not have matching parenthesis", userInput); //If the outer bracket test fails inform user
+                                break;
+                            }
+            }
+             while (EnteringData);
+        }
+           
     }
+    
 }
 
